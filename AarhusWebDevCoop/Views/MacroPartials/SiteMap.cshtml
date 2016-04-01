@@ -31,12 +31,16 @@
         <ul>
             @foreach (var item in selection)
             {
+                if (item.Name != "Sitemap")
+                {
                     <li class="level-@item.Level">
                         <a href="@item.Url">@item.Name</a>
 
                         @* Run the traverse helper again for any child pages *@
                         @Traverse(item)
                     </li>
+                }
+
             }
         </ul>
     }

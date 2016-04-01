@@ -450,6 +450,8 @@
     <Content Include="Config\Lang\ru-RU.user.xml" />
     <Content Include="Config\Lang\sv-SE.user.xml" />
     <Content Include="Config\Lang\zh-CN.user.xml" />
+    <Content Include="Content\bootstrap-material-design.min.css" />
+    <Content Include="Content\ripples.min.css" />
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
@@ -458,6 +460,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\material.min.js" />
+    <Content Include="Scripts\ripples.min.js" />
     <Content Include="umbraco\Actions\delete.aspx" />
     <Content Include="umbraco\Actions\editContent.aspx" />
     <Content Include="umbraco\Actions\preview.aspx" />
@@ -3081,6 +3085,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\contactPage.cshtml" />
+    <Content Include="Views\members.cshtml" />
+    <Content Include="Views\MacroPartials\Login.cshtml" />
+    <Content Include="Views\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

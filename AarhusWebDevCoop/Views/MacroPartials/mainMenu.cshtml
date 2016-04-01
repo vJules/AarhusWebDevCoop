@@ -4,51 +4,48 @@
 @{
     @* Get the root of the website *@
     var root = CurrentPage.AncestorOrSelf(1);
-    string selected = "";
-    var allProjects = Umbraco.TypedContentAtXPath("//ProjectItem");
+    //string selected = "";
+    //var allProjects = Umbraco.TypedContentAtXPath("//ProjectItem");
 
-    
-}))
+
 }
 <ul class="nav navbar-nav">
-    @{
-    foreach (var page in root.Children)
+    @foreach (var menuItem in root.Children.Where("umbracoNaviHide == false"))
+    {
+        var isProtected = umbraco.library.IsProtected(menuItem.id, menuItem.path);
+        var loginAccess = umbraco.library.IsProtected(menuItem.id, menuItem.path) && umbraco.library.HasAccess(menuItem.id, menuItem.path);
+        if (!isProtected || loginAccess)
         {
-            if (page.Id == CurrentPage.Id)
+            if (menuItem.Name == "Projects")
             {
-                selected = "active";
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        @menuItem.Name <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach (var project in menuItem.Children.Where("UmbracoNaviHide == false"))
+                        {
+                            var projectIsProtected = umbraco.library.IsProtected(project.id, project.path);
+                            var projectLoginAccess = umbraco.library.IsProtected(project.id, project.path) && umbraco.library.HasAccess(project.id, project.path);
+                            if (!projectIsProtected || projectLoginAccess)
+                            {
+                                <li class="@(project.IsAncestorOrSelf(CurrentPage) ? "active" : null)">
+                                    <a href="@project.Url">@project.Name</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </li>
             }
             else
             {
-                selected = "";
-            }
-            if (!page.umbracoNaviHide)
-            {
-                <li class="@selected">
-                    <a href="@page.Url">@page.Name</a>
+                <li class="@(menuItem.IsAncestorOrSelf(CurrentPage) ? "active" : null)">
+                    <a href="@menuItem.Url">@menuItem.Name</a>
                 </li>
             }
 
         }
+
+
     }
-    <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            Our Projects <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            @foreach (var project in allProjects)
-            {
-            string textValue = umbraco.library.GetPreValueAsString(Convert.ToInt32(project.GetProperty("projectStatus").Value));
-                if (textValue == "Completed")
-                {
-                    <li><a href="@project.Url">@project.Name</a></li>
-                }
-            }
-        </ul>
-    </li>
 </ul>
-
-
-
-
-

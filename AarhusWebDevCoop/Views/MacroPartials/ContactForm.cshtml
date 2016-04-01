@@ -7,20 +7,16 @@
     using (Html.BeginUmbracoForm("HandleFormSubmit", "ContactFormSurface", new object { },
         new { @class = "form-horizontal" }))
     {
-        <div class="form-group">
-            @Html.LabelFor(m => m.Name, new { @class = "col-sm-2 control-label" })
-            <div class="col-sm-6">
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Name" })
-                @Html.ValidationMessageFor(m => m.Name)
-            </div>
+        <div class="form-group label-floating">
+            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name)
         </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 control-label" })
-            <div class="col-sm-6">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Emailaddress" })
-                @Html.ValidationMessageFor(m => m.Email)
-            </div>
-        </div>
+    <div class="form-group label-floating">
+        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email)
+    </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Subject, new { @class = "col-sm-2 control-label" })
