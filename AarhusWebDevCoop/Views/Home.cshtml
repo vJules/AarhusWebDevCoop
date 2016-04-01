@@ -1,0 +1,9 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "MasterTemplate.cshtml";
+}
+
+<h1>@Umbraco.Field("siteTitle")</h1>
+@Umbraco.Field("mainContent")
+
+@Umbraco.RenderMacro("getFiveNewest")

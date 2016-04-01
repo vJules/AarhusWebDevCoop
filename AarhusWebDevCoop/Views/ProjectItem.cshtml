@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "MasterTemplate.cshtml";
+}
+@if (CurrentPage.HasValue("projectStatus"))
+{
+    var preValue = Umbraco.GetPreValueAsString(CurrentPage.projectStatus);
+    <h1>@Umbraco.Field("projectTitle") <span class="label label-default" style="font-size: 24px; float: right;">@preValue</span></h1>
+}
+else
+{
+    <h1>@Umbraco.Field("projectTitle")</h1>
+    
+}
+
+@Umbraco.Field("projectDesciption")
+

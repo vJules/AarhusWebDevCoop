@@ -1,0 +1,54 @@
+﻿@using umbraco.MacroEngines
+@inherits Umbraco.Web.Macros.PartialViewMacroPage
+
+@{
+    @* Get the root of the website *@
+    var root = CurrentPage.AncestorOrSelf(1);
+    string selected = "";
+    var allProjects = Umbraco.TypedContentAtXPath("//ProjectItem");
+
+    
+}))
+}
+<ul class="nav navbar-nav">
+    @{
+    foreach (var page in root.Children)
+        {
+            if (page.Id == CurrentPage.Id)
+            {
+                selected = "active";
+            }
+            else
+            {
+                selected = "";
+            }
+            if (!page.umbracoNaviHide)
+            {
+                <li class="@selected">
+                    <a href="@page.Url">@page.Name</a>
+                </li>
+            }
+
+        }
+    }
+    <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            Our Projects <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            @foreach (var project in allProjects)
+            {
+            string textValue = umbraco.library.GetPreValueAsString(Convert.ToInt32(project.GetProperty("projectStatus").Value));
+                if (textValue == "Completed")
+                {
+                    <li><a href="@project.Url">@project.Name</a></li>
+                }
+            }
+        </ul>
+    </li>
+</ul>
+
+
+
+
+

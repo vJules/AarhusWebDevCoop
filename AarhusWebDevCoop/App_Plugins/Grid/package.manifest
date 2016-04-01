@@ -1,0 +1,14 @@
+﻿{  "gridEditors": [
+  {
+    "name": "Full Width Image",
+    "alias": "fullWidthImage",
+    "view": "media",
+    "icon": "icon-picture",
+    "config": {
+				"size": 
+				{
+				"height": 500,
+				"width": 1170
+				}
+              }
+  }]
