@@ -9,29 +9,43 @@
     var members = memberService.GetMembersByGroup("Full Member");
 }
 <h1>@CurrentPage.Name</h1>
-@foreach (var member in members)
-{
-    var skillString = "";
+
+    @*var skillString = "";
     if (member.GetValue("skills") != null)
     {
         String[] skills = member.GetValue("skills").ToString().Split(',');
         skillString = string.Join(", ", from skill in skills select umbraco.library.GetPreValueAsString(Convert.ToInt32(skill)));
-    }
+    }*@
     
-    <p>
-        @member.GetValue("firstname")
-        @member.GetValue("lastname") <br>
-        @member.GetValue("address")<br>
-        @member.GetValue("zip") @member.GetValue("city")) <br>
-        Email: @member.Email<br>
-        Skills: @skillString
-    </p>
+        @*Skills: @skillString*@
 
 
-    if (member.GetValue("photo") != null)
+
+
+
+
+<div class="list-group col-md-4">
+    @foreach (var member in members)
     {
-        var cropUrl = Umbraco.TypedMember(member.Id).GetCropUrl("photo", "small");
-        <img src="@cropUrl" />
-        <br>
+        <div class="list-group-item">
+            <div class="row-picture">
+                @if (member.GetValue("photo") != null)
+                {
+                    var cropUrl = Umbraco.TypedMember(member.Id).GetCropUrl("photo", "small");
+                    <img class="circle" src="@cropUrl" alt="icon">
+                }
+
+            </div>
+            <div class="row-content">
+                <h4 class="list-group-item-heading">@member.GetValue("firstname") @member.GetValue("lastname")</h4>
+
+                <p class="list-group-item-text">@member.GetValue("address")</p>
+                <p class="list-group-item-text">@member.GetValue("zip") @member.GetValue("city")</p>
+                <p class="list-group-item-text">Email: @member.Email</p>
+
+            </div>
+        </div>
+
+        <div class="list-group-separator"></div>
     }
-}
+</div>

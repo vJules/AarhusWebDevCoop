@@ -33,25 +33,25 @@ namespace AarhusWebDevCoop.Controllers
             Services.ContentService.Save(comment);
 
 
-            MailMessage message = new MailMessage();
-            message.To.Add("vanjarjar@gmail.com");
-            message.Subject = model.Subject;
-            message.From = new MailAddress(model.Email, model.Name);
-            message.Body = model.Message;
+            //MailMessage message = new MailMessage();
+            //message.To.Add("removed");
+            //message.Subject = model.Subject;
+            //message.From = new MailAddress(model.Email, model.Name);
+            //message.Body = model.Message;
 
-            using (SmtpClient smtp = new SmtpClient())
-            {
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.UseDefaultCredentials = false;
-                smtp.EnableSsl = true;
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.Credentials = new System.Net.NetworkCredential("vanjarjar@gmail.com", "kzwlydacxfdgesmv");
-                smtp.EnableSsl = true;
-                // send mail
-                smtp.Send(message);
-                TempData["success"] = true;
-            }
+            //using (SmtpClient smtp = new SmtpClient())
+            //{
+            //    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            //    smtp.UseDefaultCredentials = false;
+            //    smtp.EnableSsl = true;
+            //    smtp.Host = "smtp.gmail.com";
+            //    smtp.Port = 587;
+            //    smtp.Credentials = new System.Net.NetworkCredential("removed", "removed");
+            //    smtp.EnableSsl = true;
+            //    // send mail
+            //    smtp.Send(message);
+            //    TempData["success"] = true;
+            //}
 
 
             return RedirectToCurrentUmbracoPage();
