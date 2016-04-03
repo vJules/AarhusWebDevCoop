@@ -4,18 +4,18 @@
 @{
     @* Get the root of the website *@
     var root = CurrentPage.AncestorOrSelf(1);
-    //string selected = "";
-    //var allProjects = Umbraco.TypedContentAtXPath("//ProjectItem");
-
-
 }
 <ul class="nav navbar-nav">
+    @* Loop through all children, that are not set to be hiddem *@
     @foreach (var menuItem in root.Children.Where("umbracoNaviHide == false"))
     {
         var isProtected = umbraco.library.IsProtected(menuItem.id, menuItem.path);
         var loginAccess = umbraco.library.IsProtected(menuItem.id, menuItem.path) && umbraco.library.HasAccess(menuItem.id, menuItem.path);
+        
+        @* Only show page if it is not protected, or it is protected but the current member has access *@
         if (!isProtected || loginAccess)
         {
+            @* Check if page is Projects, if it is loop through children *@
             if (menuItem.Name == "Projects")
             {
                 <li role="presentation" class="dropdown">
@@ -23,10 +23,12 @@
                         @menuItem.Name <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
+                        @* Loop through all children, that are not set to be hiddem *@
                         @foreach (var project in menuItem.Children.Where("UmbracoNaviHide == false"))
                         {
                             var projectIsProtected = umbraco.library.IsProtected(project.id, project.path);
                             var projectLoginAccess = umbraco.library.IsProtected(project.id, project.path) && umbraco.library.HasAccess(project.id, project.path);
+                            @* Only show childpage if it is not protected, or it is protected but the current member has access *@
                             if (!projectIsProtected || projectLoginAccess)
                             {
                                 <li class="@(project.IsAncestorOrSelf(CurrentPage) ? "active" : null)">
@@ -37,6 +39,8 @@
                     </ul>
                 </li>
             }
+            
+            @* If page is not Projects, just make simple <li> *@
             else
             {
                 <li class="@(menuItem.IsAncestorOrSelf(CurrentPage) ? "active" : null)">

@@ -29,8 +29,10 @@
     if (selection.Any())
     {
         <ul>
+            @* Loop all pages *@
             @foreach (var item in selection)
             {
+                @* If sitemap dont include *@
                 if (item.Name != "Sitemap")
                 {
                     <li class="level-@item.Level">
